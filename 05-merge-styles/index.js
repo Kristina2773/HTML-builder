@@ -5,7 +5,9 @@ const folder = path.join(__dirname, 'project-dist');
 const readFolder = path.join(__dirname, 'styles');
 const info = fs.createWriteStream(path.join(folder, 'bundle.css'));
 
-fs.readdir(readFolder, {withFileTypes: true}, (err, files) => {
+fs.readdir(readFolder, {
+  withFileTypes: true
+}, (err, files) => {
   if (err) {
     console.log(err);
   }
@@ -16,7 +18,7 @@ fs.readdir(readFolder, {withFileTypes: true}, (err, files) => {
       let readFile = fs.createReadStream(fileReadFolder, 'utf-8');
       readFile.on('data', chunk => array.push(chunk));
       readFile.on('end', () => {
-        for(let i = 0; i < array.length; i++) {
+        for (let i = 0; i < array.length; i++) {
           info.write(`${array[i]}\n`);
         }
       });
